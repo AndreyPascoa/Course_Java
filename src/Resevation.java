@@ -37,14 +37,26 @@ public class Resevation {
         return TimeUnit.DAYS.convert(diff, TimeUnit.MICROSECONDS);
     }
 
-    public void updateDates(Date checkIn, Date checkOut){
+    public String updateDates(Date checkIn, Date checkOut){
+
+        Date now = new Date();
+
+        if(checkIn.before(now) && checkOut.before(now)){
+             return "Error";
+        }
+
+        if(!checkOut.after(checkIn)){
+            return "Error";
+        }
+
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Room" + roomNumber + "\ncheckIn: " + sdf.format(checkIn) + "\ncheckOut: " + sdf.format(checkOut) + "\n" + duration() + "nights";
+        return "Room: " + roomNumber + "\ncheckIn: " + sdf.format(checkIn) + "\ncheckOut: " + sdf.format(checkOut) + "\n" + duration() + "nights";
     }
 
 }

@@ -28,18 +28,11 @@ public class Main {
             System.out.print("Check-Out date:");
             checkOut = sdf.parse(sc.next());
 
-            Date now = new Date();
-
-            if(checkIn.before(now) && checkOut.before(now)){
-                System.out.print("Error");
-            }else if(!checkOut.after(checkIn)){
-                System.out.print("Error");
-            }else{
-                resevation.updateDates(checkIn, checkOut);
-                System.out.println("Resevation: " + resevation);
+            String error = resevation.updateDates(checkIn, checkOut);
+            if(error != null){
+                System.out.print("Error in resevation: \n" + error);
             }
 
-            resevation.updateDates(checkIn, checkOut);
             System.out.println("Resevation: " + resevation);
         }
     }
